@@ -2,11 +2,10 @@ const mensClothingBtn = document.getElementById("mensClothing");
 const womensClothingBtn = document.getElementById("womensClothing");
 const jewelerybtn = document.getElementById("jewelery");
 const electronicsBtn = document.getElementById("electronics");
-
 const cardSection = document.getElementById('cardSection');
 const cartIcon = document.getElementById('cartCaption');
-const buyBtn = document.getElementById('cardSection');
-const navBtns = document.querySelectorAll('.buyBtn');
+const navBtns = document.querySelectorAll('.navBtn');
+let buyItems = 0;
 console.log(navBtns);
 
 // Shoppingcart with products array
@@ -50,6 +49,11 @@ function renderHTML(data) {
       buyBtn.addEventListener("click", () => {
         addToCart({ id, title, price });
         console.log("Shopping Cart:", shoppingCart); // Debugging
+
+        cartIcon.classList.remove("display-none")
+        buyItems += 1;
+        cartIcon.textContent = buyItems
+        console.log("buyItems", buyItems)
       });
     });
   }
@@ -93,11 +97,4 @@ function runner(data) {
 const addToCart = (product) => {
   shoppingCart.push(product);
 };
-let buyItems = 0;
-buyBtn.addEventListener("click", () => {
-    cartIcon.classList.remove("display-none")
-    cartIcon.textContent = buyItems
-    console.log("buyItems", buyItems)
-    buyItems += 1;
-})
 
