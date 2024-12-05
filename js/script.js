@@ -51,8 +51,6 @@ function filterData (data, type) {
     return mensClothing;
 };
 
-
-
 function runner (data) {
     renderHTML(data);
     let type;
