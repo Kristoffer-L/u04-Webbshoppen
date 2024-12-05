@@ -50,6 +50,17 @@
   height: 100px;
   object-fit: cover;
 }
+.cart-caption {
+    position: fixed;
+    margin: -3rem 0.5rem;
+    background-color: red;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 1rem;
+}
+.display-none {
+    display: none;
+}
 
 @media (min-width: 1200px) {
   .nav-list {
@@ -60,5 +71,4 @@
   .nav-list > li {
     color: var(--text-color);
   }
-
 }

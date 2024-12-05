@@ -3,7 +3,9 @@ const womensClothingBtn = document.getElementById("womensClothing");
 const jewelerybtn = document.getElementById("jewelery");
 const electronicsBtn = document.getElementById("electronics");
 const cardSection = document.getElementById('cardSection');
-const navBtns = document.querySelectorAll('.navBtn');
+const cartIcon = document.getElementById('cartCaption');
+const buyBtn = document.getElementById('cardSection');
+const navBtns = document.querySelectorAll('.buyBtn');
 console.log(navBtns);
 
 async function getInfo() {
@@ -36,7 +38,7 @@ function renderHTML(data) {
                 <p>${title}</p>  
                 <p>Price: ${price} </p>
                 <p>Rating: ${rate}/5.0</p>
-                <button>Buy</button>
+                <button id="buyBtn">Buy</button>
                 `;
 
     })
@@ -82,7 +84,13 @@ function runner (data) {
 
 };
 
-
+let buyItems = 0;
+buyBtn.addEventListener("click", () => {
+    cartIcon.classList.remove("display-none")
+    cartIcon.textContent = buyItems
+    console.log("buyItems", buyItems)
+    buyItems += 1;
+})
 
 
 
