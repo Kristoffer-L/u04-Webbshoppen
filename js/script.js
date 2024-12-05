@@ -18,7 +18,7 @@ function renderHTML(data) {
     data.map(({image, title, price, rating:{rate}}) => {
         
         const card = document.createElement("div")
-        document.querySelector(".section").appendChild(card)
+        document.querySelector("#cardSection").appendChild(card)
         card.classList.add("card-container")
         card.innerHTML += `                
                 <div>

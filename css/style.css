@@ -9,13 +9,15 @@
     display: flex;
 
 }
-.section {
+
+#cardSection {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
     margin-top: 1rem;
 }
+
 .card-container {
     width: 200px;
     height: 250px;
