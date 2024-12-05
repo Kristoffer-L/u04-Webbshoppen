@@ -79,22 +79,6 @@ function runner (data) {
 
         })
     });
-    // mensClothingBtn.addEventListener("click", () => {
-
-    // renderHTML(mensFunc(data));
-    // }) 
-    // womensClothingBtn.addEventListener("click", () => {
-
-    // renderHTML(womenFunc(data));
-    // }) 
-    // jewelerybtn.addEventListener("click", () => {
-
-    // renderHTML(jeweleryFunc(data));
-    // }) 
-    // electronicsBtn.addEventListener("click", () => {
-
-    // renderHTML(electronicFunc(data));
-    // }) 
 
 };
 
