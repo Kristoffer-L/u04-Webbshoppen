@@ -2,9 +2,11 @@ const mensClothingBtn = document.getElementById("mensClothing");
 const womensClothingBtn = document.getElementById("womensClothing");
 const jewelerybtn = document.getElementById("jewelery");
 const electronicsBtn = document.getElementById("electronics");
-const cardSection = document.getElementById("cardSection");
-const navBtns = document.querySelectorAll(".navBtn");
 
+const cardSection = document.getElementById('cardSection');
+const cartIcon = document.getElementById('cartCaption');
+const buyBtn = document.getElementById('cardSection');
+const navBtns = document.querySelectorAll('.buyBtn');
 console.log(navBtns);
 
 // Shoppingcart with products array
@@ -58,6 +60,7 @@ function filterData(data, type) {
     return v.category === `${type}`;
   });
   return mensClothing;
+
 }
 
 function runner(data) {
@@ -90,3 +93,11 @@ function runner(data) {
 const addToCart = (product) => {
   shoppingCart.push(product);
 };
+let buyItems = 0;
+buyBtn.addEventListener("click", () => {
+    cartIcon.classList.remove("display-none")
+    cartIcon.textContent = buyItems
+    console.log("buyItems", buyItems)
+    buyItems += 1;
+})
+
