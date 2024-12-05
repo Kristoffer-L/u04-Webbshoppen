@@ -10,13 +10,28 @@
 
 .nav-list {
   display: none;
-  list-style-type: none;
+  
 }
 
 .nav-logo {
   color: var(--text-color);
 }
 
+/* FOOTER STYLING */
+
+.footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgb(61, 59, 177), rgb(3, 3, 3));
+  padding: 1rem;
+}
+
+.footer-content {
+  color: var(--text-color);
+}
+
+/* MAIN SECTION STYLING */
 .section {
   display: flex;
   flex-wrap: wrap;
@@ -38,6 +53,12 @@
 
 @media (min-width: 1200px) {
   .nav-list {
-    display: block;
+    display: flex;
+    list-style-type: none;
+    gap: 4rem;
   }
+  .nav-list > li {
+    color: var(--text-color);
+  }
+
 }
