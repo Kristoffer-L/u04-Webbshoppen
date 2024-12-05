@@ -38,7 +38,7 @@ function renderHTML(data) {
           <div>
             <img class="images" src="${image}">
           </div>
-          <p>${title}</p>  
+          <p>${title.slice(title.length = 0, 20) + "..."}</p>  
           <p>Price: ${price} </p>
           <p>Rating: ${rate}/5.0</p>
           <button class="buy-btn" data-id="${id}">Buy</button>
