@@ -28,14 +28,13 @@ function renderHTML(data) {
     
     data.map(({image, title, price, rating:{rate}}) => {
         const card = document.createElement("div");
-        
         cardSection.appendChild(card);
         card.classList.add("card-container");
         card.innerHTML = `                
                 <div>
                     <img class="images" src="${image}">
                 </div>
-                <p>${title}</p>  
+                <p class="card-title">${title}</p>  
                 <p>Price: ${price} </p>
                 <p>Rating: ${rate}/5.0</p>
                 <button id="buyBtn">Buy</button>
