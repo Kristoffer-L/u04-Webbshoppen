@@ -4,7 +4,7 @@ const jewelerybtn = document.getElementById("jewelery");
 const electronicsBtn = document.getElementById("electronics");
 const cardSection = document.getElementById('cardSection');
 const navBtns = document.querySelectorAll('.navBtn');
-console.log(navBtns);
+const selectPR = document.getElementById('priceRating');
 
 async function getInfo() {
     try {
@@ -44,21 +44,28 @@ function renderHTML(data) {
 }
 
 function filterData (data, type) {
+    if (type === 'empty') {
+        return data;
+    }
     cardSection.innerHTML = ` `;
-    const mensClothing = data.filter((v) => {
+
+    const typeCategory = data.filter((v) => {
         return v.category === `${type}`;
     }) 
-    return mensClothing;
+    console.log(typeCategory);
+    return typeCategory;
 };
+
 
 
 
 function runner (data) {
     renderHTML(data);
-    let type;
+    let type = 'empty';
+
     navBtns.forEach((e) => {
         e.addEventListener('click', (event) => {
-
+            console.log('button press')
             const typeCategory = `${event.target.id}`;
             
             switch (typeCategory) {
@@ -76,9 +83,30 @@ function runner (data) {
                     break;
             };
         renderHTML(filterData(data, type));
-
         })
+
     });
+    selectPR.addEventListener('change', (event) => {
+        cardSection.innerHTML = ` `;
+         
+        let selectedValue = 'lowestRating';
+        // const selectedValue = event.target.value;
+        console.log(selectedValue);
+        if (selectedValue === 'highestPrice' || 'lowestPrice') {
+            console.log('changed price');
+            const sortedData = filterData(data, type).sort((a, b) => (selectedValue === 'lowestPrice' ?   a.price - b.price : b.price - a.price));
+            renderHTML(sortedData);
+
+        } else {
+            console.log('changed rating');
+            console.log(selectedValue);
+            const sortedData = filterData(data, type).sort((a, b) => (console.log('a', a.rating.rate), console.log('b', b.rating.rate), selectedValue === 'lowestRating' ?  a.rating.rate - b.rating.rate : b.rating.rate - a.rating.rate));
+            renderHTML(sortedData);
+        }
+
+        
+    });
+
 
 };
 
