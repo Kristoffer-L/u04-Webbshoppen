@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,16 +7,24 @@
   </head>
   <body>
     <nav class="nav-container" id="navList">
-      <img src="../img/hamburger.img.png" alt="Menu">
+
+      <img src="./img/hamburger.img.png" alt="Menu">
+
       <ul class="nav-list">
         <li class="navBtn" id="mensClothing">Men's clothing</li>
         <li class="navBtn" id="womensClothing">Women's clothing</li>
         <li class="navBtn" id="jewelery">Jewelery</li>
         <li class="navBtn" id="electronics">Electronics</li>
       </ul>
-      <figure class="nav-cart">
-        <img src="../img/white-cart-img.png" alt="shoppingcart" />
+
+      <figure class="nav-cart" id="cartIcon">
+        <img src="./img/white-cart-img.png" alt="shoppingcart" />
+        <figcaption class="cart-caption display-none" id="cartCaption"></figcaption>
       </figure>
+      <div class="cart-dropdown hidden" id="cartDropdown">
+        <h3>Your cart</h3>
+        <ul id="cartItems"></ul>
+      </div>
     </nav>
     
     <select name="price-rating" id="priceRating">

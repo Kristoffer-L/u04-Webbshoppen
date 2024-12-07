@@ -3,45 +3,70 @@ const womensClothingBtn = document.getElementById("womensClothing");
 const jewelerybtn = document.getElementById("jewelery");
 const electronicsBtn = document.getElementById("electronics");
 const cardSection = document.getElementById('cardSection');
+const cartIcon = document.getElementById('cartCaption');
 const navBtns = document.querySelectorAll('.navBtn');
+let buyItems = 0;
 const selectPR = document.getElementById('priceRating');
+
+// Shoppingcart with products array
+let shoppingCart = [];
+console.log(shoppingCart);
 
 let inputValue = "";
 
 async function getInfo() {
-    try {
-        const response = await fetch("./json/data.json")
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json()
-        console.log("data", data)
-        runner(data);
-    } catch(error) {
-        console.error("Error", error);
+  try {
+    const response = await fetch("./json/data.json");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+    const data = await response.json();
+    console.log("data", data);
+    runner(data);
+  } catch (error) {
+    console.error("Error", error);
+  }
 }
 
-getInfo()
+getInfo();
 
 function renderHTML(data) {
-    
-    data.map(({image, title, price, rating:{rate}}) => {
+    data.map(({ id, image, title, price, rating: { rate } }) => {
         const card = document.createElement("div");
-        
+  
         cardSection.appendChild(card);
         card.classList.add("card-container");
         card.innerHTML = `                
-                <div>
-                    <img class="images" src="${image}">
-                </div>
-                <p>${title}</p>  
-                <p>Price: ${price} </p>
-                <p>Rating: ${rate}/5.0</p>
-                <button>Buy</button>
-                `;
+            <div>
+                <img class="images" src="${image}">
+            </div>
+            <p>${title}</p>  
+            <p>Price: ${price} </p>
+            <p>Rating: ${rate}/5.0</p>
+            <button class="buy-btn" data-id="${id}">Buy</button>
+        `;
+  
+      // Add to cart button
+      const buyBtn = card.querySelector(".buy-btn");
+      buyBtn.addEventListener("click", () => {
+        addToCart({ id, title, price });
+        console.log("Shopping Cart:", shoppingCart); // Debugging
 
-    })
+        cartIcon.classList.remove("display-none")
+        buyItems += 1;
+        cartIcon.textContent = buyItems
+        console.log("buyItems", buyItems)
+      });
+    });
+  }
+  
+function filterData(data, type) {
+  cardSection.innerHTML = ` `;
+  const mensClothing = data.filter((v) => {
+    return v.category === `${type}`;
+  });
+  return mensClothing;
+    
 }
 
 function sortFunction (event, type, data) {
@@ -79,10 +104,10 @@ function filterData (data, type) {
 
 
 function runner (data) {
-    console.log('starting')
     renderHTML(data);
     let type = 'empty';
     const currentData = filterData(data, type);
+    
     navBtns.forEach((e) => {
         e.addEventListener('click', (event) => {
             console.log('button press')
@@ -116,9 +141,8 @@ function runner (data) {
 
 };
 
-
-
-
-
-
+// Add to cart function
+const addToCart = (product) => {
+  shoppingCart.push(product);
+};
 
