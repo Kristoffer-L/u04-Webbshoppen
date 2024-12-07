@@ -6,6 +6,8 @@ const cardSection = document.getElementById('cardSection');
 const navBtns = document.querySelectorAll('.navBtn');
 const selectPR = document.getElementById('priceRating');
 
+let inputValue = "";
+
 async function getInfo() {
     try {
         const response = await fetch("./json/data.json")
@@ -40,6 +42,23 @@ function renderHTML(data) {
                 `;
 
     })
+}
+
+function sortFunction (event, type, data) {
+    cardSection.innerHTML = ` `;
+    let selectedValue = event;    
+    
+    if (selectedValue === 'highestPrice' || selectedValue === 'lowestPrice') {
+
+        const sortedData = data.sort((a, b) => (selectedValue === 'lowestPrice' ?   a.price - b.price : b.price - a.price));
+        renderHTML(sortedData);
+    
+    } else {
+
+        const sortedData = data.sort((a, b) => (selectedValue === 'lowestRating' ?  a.rating.rate - b.rating.rate : b.rating.rate - a.rating.rate));
+        renderHTML(sortedData);
+
+    }
 
 }
 
@@ -47,12 +66,12 @@ function filterData (data, type) {
     if (type === 'empty') {
         return data;
     }
+
     cardSection.innerHTML = ` `;
 
-    const typeCategory = data.filter((v) => {
+    typeCategory = data.filter((v) => {
         return v.category === `${type}`;
     }) 
-    console.log(typeCategory);
     return typeCategory;
 };
 
@@ -60,9 +79,10 @@ function filterData (data, type) {
 
 
 function runner (data) {
+    console.log('starting')
     renderHTML(data);
     let type = 'empty';
-
+    const currentData = filterData(data, type);
     navBtns.forEach((e) => {
         e.addEventListener('click', (event) => {
             console.log('button press')
@@ -87,22 +107,8 @@ function runner (data) {
 
     });
     selectPR.addEventListener('change', (event) => {
-        cardSection.innerHTML = ` `;
-         
-        let selectedValue = 'lowestRating';
-        // const selectedValue = event.target.value;
-        console.log(selectedValue);
-        if (selectedValue === 'highestPrice' || 'lowestPrice') {
-            console.log('changed price');
-            const sortedData = filterData(data, type).sort((a, b) => (selectedValue === 'lowestPrice' ?   a.price - b.price : b.price - a.price));
-            renderHTML(sortedData);
-
-        } else {
-            console.log('changed rating');
-            console.log(selectedValue);
-            const sortedData = filterData(data, type).sort((a, b) => (console.log('a', a.rating.rate), console.log('b', b.rating.rate), selectedValue === 'lowestRating' ?  a.rating.rate - b.rating.rate : b.rating.rate - a.rating.rate));
-            renderHTML(sortedData);
-        }
+        inputValue = event.target.value;
+        sortFunction(event.target.value , type, currentData);
 
         
     });
