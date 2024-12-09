@@ -7,6 +7,7 @@ const cartIcon = document.getElementById('cartCaption');
 const navBtns = document.querySelectorAll('.navBtn');
 const cartDropdown = document.getElementById("cartDropdown");
 const cartItems = document.getElementById('cartItems');
+
 let buyItems = 0;
 
 const selectPR = document.getElementById('priceRating');
@@ -16,7 +17,6 @@ let shoppingCart = [];
 console.log(shoppingCart);
 
 let inputValue = "";
-
 
 
 async function getInfo() {
@@ -36,20 +36,22 @@ async function getInfo() {
 getInfo();
 
 function renderHTML(data) {
-    data.map(({ id, image, title, price, rating: { rate } }) => {
+  data.map(({ id, image, title, price, rating: { rate } }) => {
+    const card = document.createElement("div");
 
-      const card = document.createElement("div");
-  
-      cardSection.appendChild(card);
-      card.classList.add("card-container");
-      card.innerHTML = `                
+    cardSection.appendChild(card);
+    card.classList.add("card-container");
+    card.innerHTML = `                
           <div>
             <img class="images" src="${image}">
           </div>
-          <p>${title.slice(title.length = 0, 20) + "..."}</p>  
-          <p>Price: ${price} </p>
-          <p>Rating: ${rate}/5.0</p>
+          <h1 class="card-headline">${title.slice(0, 20)}</h1>  
+
           <button class="buy-btn" data-id="${id}">Buy</button>
+          <div class="card-info-container">
+            <p class="card-info-price">Price: €${price}</p>
+            <p class="card-info-rate">Rating: ${rate}/5.0</p>
+          </div>
         `;
   
       // Add to cart button
@@ -64,14 +66,16 @@ function renderHTML(data) {
         console.log("buyItems", buyItems)
       });
     });
-  }
-  
+  });
+}
+
 function filterData(data, type) {
   cardSection.innerHTML = ` `;
   const mensClothing = data.filter((v) => {
     return v.category === `${type}`;
   });
   return mensClothing;
+
 }
 
 function sortFunction (event, type, data) {
@@ -89,7 +93,6 @@ function sortFunction (event, type, data) {
         renderHTML(sortedData);
 
     }
-
 }
 
 function filterData (data, type) {
@@ -177,7 +180,6 @@ const addToCart = (product) => {
     shoppingCart.push(product);
     updateCartDropdown();
 };
-
 // Pressing outside the cart to close function
 document.addEventListener("click", (event) => {
     if (!cartDropdown.contains(event.target) && event.target !== cartIcon) {
