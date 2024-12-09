@@ -11,6 +11,9 @@
 
 .nav-list {
   display: none;
+  cursor: pointer;
+  
+
 }
 
 .nav-logo {
@@ -33,12 +36,13 @@
 
 /* MAIN SECTION STYLING */
 #cardSection {
-  padding-top: 5rem;
-  padding-bottom: 1rem;
+
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
+  margin-top: 1rem;
+
 }
 
 .card-container {
@@ -78,8 +82,30 @@
     overflow: hidden;
 }
 
+#priceRating{
+  /* appearance: none; */
+  margin: 10px;
+  width: 20%;
+  max-width: 200px;
+  min-width: 180px;
+  font-size: 1.15rem;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #caced1;
+  border-radius: 0.25rem;
+  color: #000;
+  cursor: pointer;
+}
+body #priceRating:hover {
+  box-shadow: inset 0px 0px 10px rgb(141, 140, 140);
+}
+.buy-btn {
+  cursor: pointer;
+}
+
 @media(min-width: 768px) {
 
+}
 @media (min-width: 1200px) {
   .nav-list {
     display: flex;
