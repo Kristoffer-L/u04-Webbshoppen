@@ -16,10 +16,6 @@ console.log(shoppingCart);
 let inputValue = "";
 
 
-// Shoppingcart with products array
-let shoppingCart = [];
-console.log(shoppingCart);
-
 async function getInfo() {
   try {
     const response = await fetch("./json/data.json");
