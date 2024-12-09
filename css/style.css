@@ -1,8 +1,7 @@
 /* NAVBAR STYLING MOBILE FIRST*/
 .nav-container {
-  position: fixed;
   display: flex;
-  align-items: center;
+  align-items: start;
   width: 100%;
   justify-content: space-between;
   background: linear-gradient(135deg, rgb(61, 59, 177), rgb(3, 3, 3));
@@ -10,14 +9,19 @@
 }
 
 .nav-list {
-  display: none;
-  cursor: pointer;
-  
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  gap: 2rem;
+}
 
+.nav-list > li {
+  color: var(--text-color);
 }
 
 .nav-logo {
-  color: var(--text-color);
+  width: 4rem;
+  height: auto;
 }
 
 /* FOOTER STYLING */
@@ -33,28 +37,33 @@
 .footer-content {
   color: var(--text-color);
 }
+.sort-select {
+  margin: 0.5rem 5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
 
 /* MAIN SECTION STYLING */
 #cardSection {
-
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
+
 }
 
 .card-container {
-    width: 20rem;
-    height: 25rem;
-    border-radius: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0.5rem;
-    box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.2);
+  width: 20rem;
+  height: 25rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.2);
 }
 .card-headline {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
   margin-bottom: 5rem;
 }
 .buy-btn {
@@ -68,15 +77,15 @@
 }
 .card-info-container {
   display: flex;
-  gap: 45%
+  gap: 45%;
 }
-.card-info-price{
+.card-info-price {
   text-align: center;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 .card-info-rate {
   text-align: center;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 .images {
   width: auto;
@@ -84,21 +93,21 @@
   padding: 1rem;
 }
 .cart-caption {
-    position: fixed;
-    margin: -3rem 0.5rem;
-    background-color: red;
-    color: white;
-    padding: 0.25rem 0.5rem;
-    border-radius: 1rem;
+  position: fixed;
+  margin: -3rem 0.5rem;
+  background-color: red;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
 }
 .display-none {
-    display: none;
+  display: none;
 }
-
 
 .card-title {
-    max-height: 30%;
+  max-height: 30%;
 }
+
 
 #priceRating{
   /* appearance: none; */
@@ -200,14 +209,18 @@ body #priceRating:hover {
 
 @media(min-width: 768px) {
 
-}
 @media (min-width: 1200px) {
   .nav-list {
     display: flex;
+    flex-direction: row;
     list-style-type: none;
     gap: 4rem;
+    margin-top: auto;
   }
-  .nav-list > li {
-    color: var(--text-color);
+  .nav-burger {
+    display: none;
+  }
+  .nav-logo {
+    order: -1;
   }
 }
