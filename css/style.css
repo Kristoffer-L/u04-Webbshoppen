@@ -41,8 +41,6 @@
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
-  margin-top: 1rem;
-
 }
 
 .card-container {
@@ -115,6 +113,7 @@
   border-radius: 0.25rem;
   color: #000;
   cursor: pointer;
+  margin-top: 5rem;
 }
 body #priceRating:hover {
   box-shadow: inset 0px 0px 10px rgb(141, 140, 140);
