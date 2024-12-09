@@ -6,6 +6,7 @@ const cardSection = document.getElementById('cardSection');
 const cartIcon = document.getElementById('cartCaption');
 const navBtns = document.querySelectorAll('.navBtn');
 let buyItems = 0;
+
 const selectPR = document.getElementById('priceRating');
 
 // Shoppingcart with products array
@@ -13,6 +14,11 @@ let shoppingCart = [];
 console.log(shoppingCart);
 
 let inputValue = "";
+
+
+// Shoppingcart with products array
+let shoppingCart = [];
+console.log(shoppingCart);
 
 async function getInfo() {
   try {
@@ -32,18 +38,19 @@ getInfo();
 
 function renderHTML(data) {
     data.map(({ id, image, title, price, rating: { rate } }) => {
-        const card = document.createElement("div");
+
+      const card = document.createElement("div");
   
-        cardSection.appendChild(card);
-        card.classList.add("card-container");
-        card.innerHTML = `                
-            <div>
-                <img class="images" src="${image}">
-            </div>
-            <p>${title}</p>  
-            <p>Price: ${price} </p>
-            <p>Rating: ${rate}/5.0</p>
-            <button class="buy-btn" data-id="${id}">Buy</button>
+      cardSection.appendChild(card);
+      card.classList.add("card-container");
+      card.innerHTML = `                
+          <div>
+            <img class="images" src="${image}">
+          </div>
+          <p>${title.slice(title.length = 0, 20) + "..."}</p>  
+          <p>Price: ${price} </p>
+          <p>Rating: ${rate}/5.0</p>
+          <button class="buy-btn" data-id="${id}">Buy</button>
         `;
   
       // Add to cart button
@@ -66,7 +73,6 @@ function filterData(data, type) {
     return v.category === `${type}`;
   });
   return mensClothing;
-    
 }
 
 function sortFunction (event, type, data) {

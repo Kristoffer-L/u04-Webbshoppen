@@ -1,5 +1,6 @@
 /* NAVBAR STYLING MOBILE FIRST*/
 .nav-container {
+  position: fixed;
   display: flex;
   align-items: center;
   width: 100%;
@@ -12,6 +13,7 @@
   display: none;
   cursor: pointer;
   
+
 }
 
 .nav-logo {
@@ -34,11 +36,13 @@
 
 /* MAIN SECTION STYLING */
 #cardSection {
+
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
   margin-top: 1rem;
+
 }
 
 .card-container {
@@ -77,6 +81,7 @@
     text-overflow: ellipsis; /* gömmer text som är för lång just nu, måste kanske visas på annat sätt? */
     overflow: hidden;
 }
+
 #priceRating{
   /* appearance: none; */
   margin: 10px;
@@ -97,8 +102,6 @@ body #priceRating:hover {
 .buy-btn {
   cursor: pointer;
 }
-
-
 
 @media(min-width: 768px) {
 
