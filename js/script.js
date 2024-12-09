@@ -58,6 +58,10 @@ function renderHTML(data) {
       console.log("Shopping Cart:", shoppingCart); // Debugging
 
       cartIcon.classList.remove("display-none");
+      let itemTracker = 0;
+      itemTracker = Number(localStorage.getItem(`${id}`));
+      itemTracker++;
+      localStorage.setItem(`${id}`, itemTracker);
       buyItems += 1;
       cartIcon.textContent = buyItems;
     });
@@ -149,5 +153,26 @@ function runner (data) {
 
 // Add to cart function
 const addToCart = (product) => {
-  shoppingCart.push(product);
+    const storageCart = [];
+    const previousCart = JSON.parse(localStorage.getItem('all'));
+
+    if (previousCart !== null) {
+        previousCart.forEach(e => {
+            storageCart.push(e);
+        })  
+    }
+    storageCart.push(product);
+    const cost = storageCart.map((e) => {
+        return e.price;
+    })
+
+    const total = cost.reduce((acc, current) => {
+    
+        return acc + current;
+    });
+    console.log(total.toFixed(2));
+    localStorage.setItem('all', JSON.stringify(storageCart));
+    shoppingCart.push(product);
 };
+
+
