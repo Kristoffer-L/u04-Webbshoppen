@@ -41,22 +41,44 @@
 }
 
 .card-container {
-    width: 200px;
-    height: 250px;
-    border: 2px solid black;
-    border-radius: 5px;
+    width: 20rem;
+    height: 25rem;
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    text-align: center;
     padding: 0.5rem;
+    box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.2);
 }
-
+.card-headline {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin-bottom: 5rem;
+}
+.buy-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  margin-bottom: 2rem;
+}
+.buy-btn:hover {
+  background-color: darkcyan;
+}
+.card-info-container {
+  display: flex;
+  gap: 45%
+}
+.card-info-price{
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.card-info-rate {
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 .images {
   width: auto;
-  height: 100px;
-  object-fit: cover;
+  height: 10rem;
+  padding: 1rem;
 }
 .cart-caption {
     position: fixed;
@@ -73,8 +95,6 @@
 
 .card-title {
     max-height: 30%;
-    text-overflow: ellipsis; /* gömmer text som är för lång just nu, måste kanske visas på annat sätt? */
-    overflow: hidden;
 }
 
 @media(min-width: 768px) {

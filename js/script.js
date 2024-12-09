@@ -2,9 +2,9 @@ const mensClothingBtn = document.getElementById("mensClothing");
 const womensClothingBtn = document.getElementById("womensClothing");
 const jewelerybtn = document.getElementById("jewelery");
 const electronicsBtn = document.getElementById("electronics");
-const cardSection = document.getElementById('cardSection');
-const cartIcon = document.getElementById('cartCaption');
-const navBtns = document.querySelectorAll('.navBtn');
+const cardSection = document.getElementById("cardSection");
+const cartIcon = document.getElementById("cartCaption");
+const navBtns = document.querySelectorAll(".navBtn");
 let buyItems = 0;
 console.log(navBtns);
 
@@ -29,42 +29,42 @@ async function getInfo() {
 getInfo();
 
 function renderHTML(data) {
-    data.map(({ id, image, title, price, rating: { rate } }) => {
-      const card = document.createElement("div");
-  
-      cardSection.appendChild(card);
-      card.classList.add("card-container");
-      card.innerHTML = `                
+  data.map(({ id, image, title, price, rating: { rate } }) => {
+    const card = document.createElement("div");
+
+    cardSection.appendChild(card);
+    card.classList.add("card-container");
+    card.innerHTML = `                
           <div>
             <img class="images" src="${image}">
           </div>
-          <p>${title}</p>  
-          <p>Price: ${price} </p>
-          <p>Rating: ${rate}/5.0</p>
+          <h1 class="card-headline">${title.slice(0, 20)}</h1>  
           <button class="buy-btn" data-id="${id}">Buy</button>
+          <div class="card-info-container">
+            <p class="card-info-price">Price: €${price}</p>
+            <p class="card-info-rate">Rating: ${rate}/5.0</p>
+          </div>
         `;
-  
-      // Add to cart button
-      const buyBtn = card.querySelector(".buy-btn");
-      buyBtn.addEventListener("click", () => {
-        addToCart({ id, title, price });
-        console.log("Shopping Cart:", shoppingCart); // Debugging
 
-        cartIcon.classList.remove("display-none")
-        buyItems += 1;
-        cartIcon.textContent = buyItems
-        console.log("buyItems", buyItems)
-      });
+    // Add to cart button
+    const buyBtn = card.querySelector(".buy-btn");
+    buyBtn.addEventListener("click", () => {
+      addToCart({ id, title, price });
+      console.log("Shopping Cart:", shoppingCart); // Debugging
+
+      cartIcon.classList.remove("display-none");
+      buyItems += 1;
+      cartIcon.textContent = buyItems;
     });
-  }
-  
+  });
+}
+
 function filterData(data, type) {
   cardSection.innerHTML = ` `;
   const mensClothing = data.filter((v) => {
     return v.category === `${type}`;
   });
   return mensClothing;
-
 }
 
 function runner(data) {
@@ -97,4 +97,3 @@ function runner(data) {
 const addToCart = (product) => {
   shoppingCart.push(product);
 };
-
