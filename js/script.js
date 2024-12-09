@@ -5,21 +5,17 @@ const electronicsBtn = document.getElementById("electronics");
 const cardSection = document.getElementById("cardSection");
 const cartIcon = document.getElementById("cartCaption");
 const navBtns = document.querySelectorAll(".navBtn");
+const navBurger = document.getElementById("navBurger");
+const navList = document.getElementById("navList");
 let buyItems = 0;
 
-const selectPR = document.getElementById('priceRating');
+const selectPR = document.getElementById("priceRating");
 
 // Shoppingcart with products array
 let shoppingCart = [];
 console.log(shoppingCart);
 
 let inputValue = "";
-
-
-// Shoppingcart with products array
-let shoppingCart = [];
-console.log(shoppingCart);
-
 async function getInfo() {
   try {
     const response = await fetch("./json/data.json");
@@ -46,7 +42,7 @@ function renderHTML(data) {
           <div>
             <img class="images" src="${image}">
           </div>
-          <h1 class="card-headline">${title.slice(0, 20)}</h1>  
+          <h1 class="card-headline">${title.slice(0, 20)}...</h1>  
 
           <button class="buy-btn" data-id="${id}">Buy</button>
           <div class="card-info-container">
@@ -68,87 +64,77 @@ function renderHTML(data) {
   });
 }
 
-function filterData(data, type) {
+function sortFunction(event, type, data) {
   cardSection.innerHTML = ` `;
-  const mensClothing = data.filter((v) => {
+  let selectedValue = event;
+
+  if (selectedValue === "highestPrice" || selectedValue === "lowestPrice") {
+    const sortedData = data.sort((a, b) => (selectedValue === "lowestPrice" ? a.price - b.price : b.price - a.price));
+    renderHTML(sortedData);
+  } else {
+    const sortedData = data.sort((a, b) => (selectedValue === "lowestRating" ? a.rating.rate - b.rating.rate : b.rating.rate - a.rating.rate));
+    renderHTML(sortedData);
+  }
+}
+
+function filterData(data, type) {
+  if (type === "empty") {
+    return data;
+  }
+
+  cardSection.innerHTML = ` `;
+
+  typeCategory = data.filter((v) => {
     return v.category === `${type}`;
   });
-  return mensClothing;
-
+  return typeCategory;
 }
 
-function sortFunction (event, type, data) {
-    cardSection.innerHTML = ` `;
-    let selectedValue = event;    
-    
-    if (selectedValue === 'highestPrice' || selectedValue === 'lowestPrice') {
+function runner(data) {
+  renderHTML(data);
+  let type = "empty";
+  const currentData = filterData(data, type);
 
-        const sortedData = data.sort((a, b) => (selectedValue === 'lowestPrice' ?   a.price - b.price : b.price - a.price));
-        renderHTML(sortedData);
-    
-    } else {
+  navBtns.forEach((e) => {
+    e.addEventListener("click", (event) => {
+      console.log("button press");
+      const typeCategory = `${event.target.id}`;
 
-        const sortedData = data.sort((a, b) => (selectedValue === 'lowestRating' ?  a.rating.rate - b.rating.rate : b.rating.rate - a.rating.rate));
-        renderHTML(sortedData);
-
-    }
+      switch (typeCategory) {
+        case "womensClothing":
+          type = "women's clothing";
+          break;
+        case "mensClothing":
+          type = "men's clothing";
+          break;
+        case "electronics":
+          type = "electronics";
+          break;
+        case "jewelery":
+          type = "jewelery";
+          break;
+      }
+      renderHTML(filterData(data, type));
+    });
+  });
+  selectPR.addEventListener("change", (event) => {
+    inputValue = event.target.value;
+    sortFunction(event.target.value, type, currentData);
+  });
 }
-
-function filterData (data, type) {
-    if (type === 'empty') {
-        return data;
-    }
-
-    cardSection.innerHTML = ` `;
-
-    typeCategory = data.filter((v) => {
-        return v.category === `${type}`;
-    }) 
-    return typeCategory;
-};
-
-
-
-
-function runner (data) {
-    renderHTML(data);
-    let type = 'empty';
-    const currentData = filterData(data, type);
-    
-    navBtns.forEach((e) => {
-        e.addEventListener('click', (event) => {
-            console.log('button press')
-            const typeCategory = `${event.target.id}`;
-            
-            switch (typeCategory) {
-                case "womensClothing": 
-                type = "women's clothing";
-                break;
-                case "mensClothing":
-                    type = "men's clothing";
-                    break;
-                case "electronics":
-                    type = "electronics";
-                    break;
-                case "jewelery":
-                    type = "jewelery";
-                    break;
-            };
-        renderHTML(filterData(data, type));
-        })
-
-    });
-    selectPR.addEventListener('change', (event) => {
-        inputValue = event.target.value;
-        sortFunction(event.target.value , type, currentData);
-
-        
-    });
-
-
-};
 
 // Add to cart function
 const addToCart = (product) => {
   shoppingCart.push(product);
 };
+
+let appendNav = true;
+navBurger.addEventListener("click", () => {
+  if (appendNav) {
+    navList.classList.add("display-none");
+    appendNav = false;
+  } else {
+    navList.classList.remove("display-none");
+    appendNav = true;
+  }
+});
