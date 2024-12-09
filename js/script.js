@@ -80,14 +80,17 @@ function sortFunction (event, type, data) {
     if (selectedValue === 'highestPrice' || selectedValue === 'lowestPrice') {
 
         const sortedData = data.sort((a, b) => (selectedValue === 'lowestPrice' ?   a.price - b.price : b.price - a.price));
-        renderHTML(sortedData);
+        const filterSorted = filterData(sortedData, type);
+        renderHTML(filterSorted);
     
     } else {
 
         const sortedData = data.sort((a, b) => (selectedValue === 'lowestRating' ?  a.rating.rate - b.rating.rate : b.rating.rate - a.rating.rate));
-        renderHTML(sortedData);
+        const filterSorted = filterData(sortedData, type);
+        renderHTML(filterSorted);
 
     }
+    
 }
 
 function filterData (data, type) {
