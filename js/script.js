@@ -11,7 +11,6 @@ const selectPR = document.getElementById('priceRating');
 
 // Shoppingcart with products array
 let shoppingCart = [];
-console.log(shoppingCart);
 
 let inputValue = "";
 
@@ -58,6 +57,7 @@ function renderHTML(data) {
       console.log("Shopping Cart:", shoppingCart); // Debugging
 
       cartIcon.classList.remove("display-none");
+    // counts occurences of same item;   
       let itemTracker = 0;
       itemTracker = Number(localStorage.getItem(`${id}`));
       itemTracker++;
@@ -153,6 +153,7 @@ function runner (data) {
 
 // Add to cart function
 const addToCart = (product) => {
+    // puts cart in localStorage
     const storageCart = [];
     const previousCart = JSON.parse(localStorage.getItem('all'));
 
@@ -162,10 +163,23 @@ const addToCart = (product) => {
         })  
     }
     storageCart.push(product);
-    const cost = storageCart.map((e) => {
-        return e.price;
-    })
 
+    // example
+    console.log(new Map(storageCart.map(v => [v.id, v])))
+    // Maps through cart and creates 2d array of key value pairs, new Map() cant have duplicat keys
+    // using id as the key and the object is our value. values() iterates through the values aka our object 
+    // and then the spread operator splits each object into an array element
+    const uniqueItems = [...new Map(storageCart.map(v => [v.id, v])).values()];
+
+    console.log(uniqueItems);
+ 
+
+    // makes array to reduce
+    const cost = storageCart.map(({price}) => {
+        return price;
+    });
+
+    // calculates total price
     const total = cost.reduce((acc, current) => {
     
         return acc + current;
