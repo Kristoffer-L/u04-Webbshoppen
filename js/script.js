@@ -66,8 +66,8 @@ function renderHTML(data) {
         console.log("buyItems", buyItems)
       });
     });
-  });
-}
+  };
+
 
 function sortFunction(event, type, data) {
   cardSection.innerHTML = ` `;
@@ -133,6 +133,16 @@ cartIcon.addEventListener("click", () => {
     cartDropdown.classList.toggle("hidden");
 });
 
+// Function to calculate the total amount for all items in the shopping cart - Therese
+const calculateTotal = () => {
+  const total = shoppingCart.reduce((acc, item) => acc + item.price, 0);
+  const totalElement = document.getElementById("totalPrice");
+  if (totalElement) {
+      totalElement.textContent = `Total: €${total.toFixed(2)}`;
+  }
+  return total;
+};
+
 const updateCartDropdown = () => {
     cartItems.innerHTML = ""; 
     shoppingCart.forEach((item, index) => {
@@ -151,13 +161,17 @@ const updateCartDropdown = () => {
             const index = event.target.dataset.index; //Get button index
             shoppingCart.splice(index, 1);
             updateCartDropdown();
+            calculateTotal();  // Update the total amount after removal - Therese
         })
     })
+    // Calculate and display the total amount each time the cart is updated - Therese
+    calculateTotal();
 };
 
 const addToCart = (product) => {
     shoppingCart.push(product);
     updateCartDropdown();
+    calculateTotal();  // Updates the total as it is added - Therese
 };
 
 let appendNav = true;
