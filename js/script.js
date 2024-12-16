@@ -9,6 +9,7 @@ const cartDropdown = document.getElementById("cartDropdown");
 const cartItems = document.getElementById("cartItems");
 const navBurger = document.getElementById("navBurger");
 const navList = document.getElementById("navList");
+const navCart = document.getElementById("cart");
 
 let buyItems = 0;
 
@@ -148,7 +149,7 @@ function runner(data) {
 };
 
 // Add to cart function with display items and remove buttons for each item
-cartIcon.addEventListener("click", () => {
+navCart.addEventListener("click", () => {
   cartDropdown.classList.toggle("hidden");
 });
 
@@ -244,7 +245,8 @@ navBurger.addEventListener("click", () => {
 
 // Pressing outside the cart to close function
 document.addEventListener("click", (event) => {
-  if (!cartDropdown.contains(event.target) && event.target !== cartIcon) {
+  if (!cartDropdown.contains(event.target) && event.target !== navCart) {
     cartDropdown.classList.add("hidden");
   }
 });
+

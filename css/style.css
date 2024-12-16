@@ -1,5 +1,6 @@
 /* NAVBAR STYLING MOBILE FIRST*/
 .nav-container {
+  position: fixed;
   display: flex;
   align-items: start;
   width: 100%;
@@ -38,7 +39,7 @@
   color: var(--text-color);
 }
 .sort-select {
-  margin: 0.5rem 5rem;
+  margin: 1rem 5rem;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
 }
@@ -91,9 +92,13 @@
   height: 10rem;
   padding: 1rem;
 }
+.nav-cart-image {
+  width: 3rem;
+  height: 3rem;
+}
 .cart-caption {
   position: fixed;
-  margin: -3rem 0.5rem;
+  margin: -3.5rem 1.5rem;
   background-color: red;
   color: white;
   padding: 0.25rem 0.5rem;
@@ -120,7 +125,7 @@
   border-radius: 0.25rem;
   color: #000;
   cursor: pointer;
-  margin-top: 5rem;
+  margin-top: 7rem;
 }
 body #priceRating:hover {
   box-shadow: inset 0px 0px 10px rgb(141, 140, 140);
