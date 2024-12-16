@@ -85,8 +85,8 @@ function renderHTML(data) {
 
 
     });
-  });
-}
+  };
+
 
 function sortFunction(event, type, data) {
   cardSection.innerHTML = ` `;
@@ -153,6 +153,16 @@ navCart.addEventListener("click", () => {
   cartDropdown.classList.toggle("hidden");
 });
 
+// Function to calculate the total amount for all items in the shopping cart - Therese
+const calculateTotal = () => {
+  const total = shoppingCart.reduce((acc, item) => acc + item.price, 0);
+  const totalElement = document.getElementById("totalPrice");
+  if (totalElement) {
+      totalElement.textContent = `Total: €${total.toFixed(2)}`;
+  }
+  return total;
+};
+
 const updateCartDropdown = () => {
   cartItems.innerHTML = "";
   let shoppingCart = JSON.parse(localStorage.getItem('all'));
@@ -179,7 +189,7 @@ const updateCartDropdown = () => {
   removeButtons.forEach((btn) => {
     btn.addEventListener("click", (event) => {
       const objectID = event.target.dataset.id; //Get button index
-    
+      calculateTotal();
       itemTracker = Number(localStorage.getItem(`${objectID}`));
       itemTracker--;
       localStorage.setItem(`${objectID}`, itemTracker);
@@ -191,6 +201,7 @@ const updateCartDropdown = () => {
       updateCartDropdown();
     });
   });
+  calculateTotal();
 };
 
 const addToCart = (product) => {
@@ -229,6 +240,7 @@ const addToCart = (product) => {
     console.log(total.toFixed(2));
     localStorage.setItem('all', JSON.stringify(storageCart));
     updateCartDropdown();
+    calculateTotal();  // Updates the total as it is added - Therese
 
 };
 
