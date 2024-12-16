@@ -14,9 +14,7 @@ let buyItems = 0;
 
 const selectPR = document.getElementById("priceRating");
 
-// Shoppingcart with products array
-let shoppingCart = [];
-console.log(shoppingCart);
+
 
 let inputValue = "";
 async function getInfo() {
@@ -34,6 +32,23 @@ async function getInfo() {
 }
 
 getInfo();
+
+function cartItemDisplay () {
+    let itemContainer = 0;
+    const itemArrayTracker = [];
+    for (let i = 1; i <= 20; i++ ) {
+
+      itemContainer = Number(localStorage.getItem(`${i}`));
+      itemArrayTracker.push(itemContainer);
+    }
+    console.log(itemArrayTracker)
+    const amountOfItems = itemArrayTracker.reduce((acc, current) => {
+      return acc + current;
+    });
+    localStorage.setItem('totalItems', amountOfItems);
+    cartIcon.textContent = amountOfItems;
+
+}
 
 function renderHTML(data) {
   data.map(({ id, image, title, price, rating: { rate } }) => {
@@ -57,13 +72,17 @@ function renderHTML(data) {
     // Add to cart button
     const buyBtn = card.querySelector(".buy-btn");
     buyBtn.addEventListener("click", () => {
-      addToCart({ id, title, price, image });
-      console.log("Shopping Cart:", shoppingCart); // Debugging
 
       cartIcon.classList.remove("display-none");
-      buyItems += 1;
-      cartIcon.textContent = buyItems;
-      console.log("buyItems", buyItems);
+      let itemTracker = 0;
+      itemTracker = Number(localStorage.getItem(`${id}`));
+      itemTracker++;
+      localStorage.setItem(`${id}`, itemTracker);
+    cartItemDisplay()
+    addToCart({ id, title, price, image });
+
+
+
     });
   });
 }
@@ -74,10 +93,12 @@ function sortFunction(event, type, data) {
 
   if (selectedValue === "highestPrice" || selectedValue === "lowestPrice") {
     const sortedData = data.sort((a, b) => (selectedValue === "lowestPrice" ? a.price - b.price : b.price - a.price));
-    renderHTML(sortedData);
+    const filterSorted = filterData(sortedData, type);
+    renderHTML(filterSorted);
   } else {
     const sortedData = data.sort((a, b) => (selectedValue === "lowestRating" ? a.rating.rate - b.rating.rate : b.rating.rate - a.rating.rate));
-    renderHTML(sortedData);
+    const filterSorted = filterData(sortedData, type);
+    renderHTML(filterSorted);
   }
 }
 
@@ -101,7 +122,6 @@ function runner(data) {
 
   navBtns.forEach((e) => {
     e.addEventListener("click", (event) => {
-      console.log("button press");
       const typeCategory = `${event.target.id}`;
 
       switch (typeCategory) {
@@ -125,7 +145,7 @@ function runner(data) {
     inputValue = event.target.value;
     sortFunction(event.target.value, type, currentData);
   });
-}
+};
 
 // Add to cart function with display items and remove buttons for each item
 cartIcon.addEventListener("click", () => {
@@ -134,12 +154,22 @@ cartIcon.addEventListener("click", () => {
 
 const updateCartDropdown = () => {
   cartItems.innerHTML = "";
-  shoppingCart.forEach((item, index) => {
+  let shoppingCart = JSON.parse(localStorage.getItem('all'));
+  console.log(shoppingCart)
+  const uniqueItems = [...new Map(shoppingCart.map(v => [v.id, v])).values()];
+
+  uniqueItems.forEach(({id, image, title, price}, index) => {
+    console.log(id)
+    const numberOfItems = Number(localStorage.getItem(`${id}`));
+    // const numberOfItems = Number(localStorage.getItem(`${uniqueItems[index].id}`));
+    // console.log(`${uniqueItems[index].id}`)
+
     const li = document.createElement("li");
     li.innerHTML = `
-            <img class="cart-image" src="${item.image}" alt="${item.title}">
-            ${item.title} - $${item.price}
-            <button class="remove-btn data-index="${index}">Remove</button> 
+            <p>Amount ${numberOfItems}</p>
+            <img class="cart-image" src="${image}" alt="${title}">
+            ${title} - $${price}
+            <button class="remove-btn" data-index="${index} "data-id="${id}">Remove</button> 
         `;
     cartItems.appendChild(li);
   });
@@ -147,16 +177,58 @@ const updateCartDropdown = () => {
   const removeButtons = cartItems.querySelectorAll(".remove-btn");
   removeButtons.forEach((btn) => {
     btn.addEventListener("click", (event) => {
-      const index = event.target.dataset.index; //Get button index
-      shoppingCart.splice(index, 1);
+      const objectID = event.target.dataset.id; //Get button index
+    
+      itemTracker = Number(localStorage.getItem(`${objectID}`));
+      itemTracker--;
+      localStorage.setItem(`${objectID}`, itemTracker);
+      const idx = shoppingCart.findIndex(e => e.id == objectID);
+      shoppingCart.splice(idx, 1);
+      localStorage.setItem('all', JSON.stringify(shoppingCart));
+      cartItemDisplay();
+      
       updateCartDropdown();
     });
   });
 };
 
 const addToCart = (product) => {
-  shoppingCart.push(product);
-  updateCartDropdown();
+//   shoppingCart.push(product);
+  const storageCart = [];
+    const previousCart = JSON.parse(localStorage.getItem('all'));
+
+    if (previousCart !== null) {
+        previousCart.forEach(e => {
+            storageCart.push(e);
+        })  
+    }
+    storageCart.push(product);
+
+    // example
+    // console.log(new Map(storageCart.map(v => [v.id, v])))
+
+    // Maps through cart and creates 2d array of key value pairs, new Map() cant have duplicat keys
+    // using id as the key and the object is our value. values() iterates through the values aka our object 
+    // and then the spread operator splits each object into an array element
+    const uniqueItems = [...new Map(storageCart.map(v => [v.id, v])).values()];
+
+    console.log(uniqueItems);
+ 
+
+    // makes array to reduce
+    const cost = storageCart.map(({price}) => {
+        return price;
+    });
+
+    // calculates total price
+    const total = cost.reduce((acc, current) => {
+    
+        return acc + current;
+    });
+    console.log(total.toFixed(2));
+    localStorage.setItem('all', JSON.stringify(storageCart));
+    updateCartDropdown();
+
 };
 
 let appendNav = true;
