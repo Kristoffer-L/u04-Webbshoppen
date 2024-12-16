@@ -245,7 +245,8 @@ navBurger.addEventListener("click", () => {
 
 // Pressing outside the cart to close function
 document.addEventListener("click", (event) => {
-  if (!cartDropdown.contains(event.target) && event.target !== navCart) {
+  // Check if the click is outside the cart and not on the remove button
+  if (!cartDropdown.contains(event.target) && event.target !== navCart && !event.target.classList.contains("remove-btn")) {
     cartDropdown.classList.add("hidden");
   }
 });
