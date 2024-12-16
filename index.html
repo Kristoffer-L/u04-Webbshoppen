@@ -4,6 +4,15 @@
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/base.css" />
     <title>Document</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MQTNE824CT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-MQTNE824CT');
+    </script>
   </head>
   <body>
     <nav class="nav-container">
@@ -16,15 +25,16 @@
         <li class="navBtn" id="electronics">Electronics</li>
       </ul>
       
-      <img class="nav-logo" src="./img/Logo.svg" alt="logo">
+      <img class="nav-logo" src="./img/Logo.png" alt="logo">
       <figure class="nav-cart" id="cartIcon">
-        <img src="./img/white-cart-img.png" alt="shoppingcart" />
+        <img class="nav-cart-image" id="cart" src="./img/white-cart-img.png" alt="shoppingcart" />
         <figcaption class="cart-caption display-none" id="cartCaption"></figcaption>
       </figure>
-      <!-- <div class="cart-dropdown hidden" id="cartDropdown">
+      <div class="cart-dropdown hidden" id="cartDropdown">
         <h3>Your cart</h3>
         <ul id="cartItems"></ul>
-      </div> -->
+        <a href="./checkout.html">Go to cart</a>
+      </div>
     </nav>
 
     <select  class="sort-select" name="price-rating" id="priceRating">
