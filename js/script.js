@@ -85,7 +85,8 @@ function renderHTML(data) {
 
 
     });
-  };
+  })
+};
 
 
 function sortFunction(event, type, data) {
@@ -155,6 +156,7 @@ navCart.addEventListener("click", () => {
 
 // Function to calculate the total amount for all items in the shopping cart - Therese
 const calculateTotal = () => {
+    shoppingCart = JSON.parse(localStorage.getItem('all'));
   const total = shoppingCart.reduce((acc, item) => acc + item.price, 0);
   const totalElement = document.getElementById("totalPrice");
   if (totalElement) {
