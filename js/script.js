@@ -15,8 +15,6 @@ let buyItems = 0;
 
 const selectPR = document.getElementById("priceRating");
 
-
-
 let inputValue = "";
 async function getInfo() {
   try {
@@ -34,21 +32,22 @@ async function getInfo() {
 
 getInfo();
 
-function cartItemDisplay () {
-    let itemContainer = 0;
-    const itemArrayTracker = [];
-    for (let i = 1; i <= 20; i++ ) {
-
-      itemContainer = Number(localStorage.getItem(`${i}`));
-      itemArrayTracker.push(itemContainer);
-    }
-    console.log(itemArrayTracker)
-    const amountOfItems = itemArrayTracker.reduce((acc, current) => {
-      return acc + current;
-    });
-    localStorage.setItem('totalItems', amountOfItems);
-    cartIcon.textContent = amountOfItems;
-
+function cartItemDisplay() {
+  let itemContainer = 0;
+  const itemArrayTracker = [];
+  for (let i = 1; i <= 20; i++) {
+    itemContainer = Number(localStorage.getItem(`${i}`));
+    itemArrayTracker.push(itemContainer);
+  }
+  console.log(itemArrayTracker);
+  const amountOfItems = itemArrayTracker.reduce((acc, current) => {
+    return acc + current;
+  });
+  localStorage.setItem("totalItems", amountOfItems);
+  cartIcon.textContent = amountOfItems;
+  if (amountOfItems < 1) {
+    cartIcon.classList.add("display-none");
+  }
 }
 
 function renderHTML(data) {
@@ -73,21 +72,16 @@ function renderHTML(data) {
     // Add to cart button
     const buyBtn = card.querySelector(".buy-btn");
     buyBtn.addEventListener("click", () => {
-
       cartIcon.classList.remove("display-none");
       let itemTracker = 0;
       itemTracker = Number(localStorage.getItem(`${id}`));
       itemTracker++;
       localStorage.setItem(`${id}`, itemTracker);
-    cartItemDisplay()
-    addToCart({ id, title, price, image });
-
-
-
+      cartItemDisplay();
+      addToCart({ id, title, price, image });
     });
-  })
-};
-
+  });
+}
 
 function sortFunction(event, type, data) {
   cardSection.innerHTML = ` `;
@@ -147,7 +141,7 @@ function runner(data) {
     inputValue = event.target.value;
     sortFunction(event.target.value, type, currentData);
   });
-};
+}
 
 // Add to cart function with display items and remove buttons for each item
 navCart.addEventListener("click", () => {
@@ -156,23 +150,23 @@ navCart.addEventListener("click", () => {
 
 // Function to calculate the total amount for all items in the shopping cart - Therese
 const calculateTotal = () => {
-    shoppingCart = JSON.parse(localStorage.getItem('all'));
+  shoppingCart = JSON.parse(localStorage.getItem("all"));
   const total = shoppingCart.reduce((acc, item) => acc + item.price, 0);
   const totalElement = document.getElementById("totalPrice");
   if (totalElement) {
-      totalElement.textContent = `Total: €${total.toFixed(2)}`;
+    totalElement.textContent = `Total: €${total.toFixed(2)}`;
   }
   return total;
 };
 
 const updateCartDropdown = () => {
   cartItems.innerHTML = "";
-  let shoppingCart = JSON.parse(localStorage.getItem('all'));
-  console.log(shoppingCart)
-  const uniqueItems = [...new Map(shoppingCart.map(v => [v.id, v])).values()];
+  let shoppingCart = JSON.parse(localStorage.getItem("all"));
+  console.log(shoppingCart);
+  const uniqueItems = [...new Map(shoppingCart.map((v) => [v.id, v])).values()];
 
-  uniqueItems.forEach(({id, image, title, price}, index) => {
-    console.log(id)
+  uniqueItems.forEach(({ id, image, title, price }, index) => {
+    console.log(id);
     const numberOfItems = Number(localStorage.getItem(`${id}`));
     // const numberOfItems = Number(localStorage.getItem(`${uniqueItems[index].id}`));
     // console.log(`${uniqueItems[index].id}`)
@@ -195,11 +189,11 @@ const updateCartDropdown = () => {
       itemTracker = Number(localStorage.getItem(`${objectID}`));
       itemTracker--;
       localStorage.setItem(`${objectID}`, itemTracker);
-      const idx = shoppingCart.findIndex(e => e.id == objectID);
+      const idx = shoppingCart.findIndex((e) => e.id == objectID);
       shoppingCart.splice(idx, 1);
-      localStorage.setItem('all', JSON.stringify(shoppingCart));
+      localStorage.setItem("all", JSON.stringify(shoppingCart));
       cartItemDisplay();
-      
+
       updateCartDropdown();
     });
   });
@@ -207,43 +201,40 @@ const updateCartDropdown = () => {
 };
 
 const addToCart = (product) => {
-//   shoppingCart.push(product);
+  //   shoppingCart.push(product);
   const storageCart = [];
-    const previousCart = JSON.parse(localStorage.getItem('all'));
+  const previousCart = JSON.parse(localStorage.getItem("all"));
 
-    if (previousCart !== null) {
-        previousCart.forEach(e => {
-            storageCart.push(e);
-        })  
-    }
-    storageCart.push(product);
-
-    // example
-    // console.log(new Map(storageCart.map(v => [v.id, v])))
-
-    // Maps through cart and creates 2d array of key value pairs, new Map() cant have duplicat keys
-    // using id as the key and the object is our value. values() iterates through the values aka our object 
-    // and then the spread operator splits each object into an array element
-    const uniqueItems = [...new Map(storageCart.map(v => [v.id, v])).values()];
-
-    console.log(uniqueItems);
- 
-
-    // makes array to reduce
-    const cost = storageCart.map(({price}) => {
-        return price;
+  if (previousCart !== null) {
+    previousCart.forEach((e) => {
+      storageCart.push(e);
     });
+  }
+  storageCart.push(product);
 
-    // calculates total price
-    const total = cost.reduce((acc, current) => {
-    
-        return acc + current;
-    });
-    console.log(total.toFixed(2));
-    localStorage.setItem('all', JSON.stringify(storageCart));
-    updateCartDropdown();
-    calculateTotal();  // Updates the total as it is added - Therese
+  // example
+  // console.log(new Map(storageCart.map(v => [v.id, v])))
 
+  // Maps through cart and creates 2d array of key value pairs, new Map() cant have duplicat keys
+  // using id as the key and the object is our value. values() iterates through the values aka our object
+  // and then the spread operator splits each object into an array element
+  const uniqueItems = [...new Map(storageCart.map((v) => [v.id, v])).values()];
+
+  console.log(uniqueItems);
+
+  // makes array to reduce
+  const cost = storageCart.map(({ price }) => {
+    return price;
+  });
+
+  // calculates total price
+  const total = cost.reduce((acc, current) => {
+    return acc + current;
+  });
+  console.log(total.toFixed(2));
+  localStorage.setItem("all", JSON.stringify(storageCart));
+  updateCartDropdown();
+  calculateTotal(); // Updates the total as it is added - Therese
 };
 
 let appendNav = true;
@@ -264,4 +255,3 @@ document.addEventListener("click", (event) => {
     cartDropdown.classList.add("hidden");
   }
 });
-
