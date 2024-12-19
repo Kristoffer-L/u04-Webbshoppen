@@ -2,7 +2,7 @@
 .nav-container {
   position: fixed;
   display: flex;
-  align-items: start;
+  align-items: center;
   width: 100%;
   justify-content: space-between;
   background: linear-gradient(135deg, rgb(61, 59, 177), rgb(3, 3, 3));
@@ -11,6 +11,7 @@
 
 .nav-list {
   display: flex;
+
   flex-direction: column;
   list-style-type: none;
   gap: 2rem;
@@ -18,6 +19,13 @@
 
 .nav-list > li {
   color: var(--text-color);
+}
+
+.navBtn {
+  cursor: pointer;
+  &:hover {
+    color: rgb(61, 59, 177);
+  }
 }
 
 .nav-logo {
@@ -39,9 +47,10 @@
   color: var(--text-color);
 }
 .sort-select {
-  margin: 1rem 5rem;
+  margin: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
+  
 }
 
 /* MAIN SECTION STYLING */
@@ -60,7 +69,12 @@
   flex-direction: column;
   align-items: center;
   padding: 0.5rem;
-  box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);;
+  }
 }
 .card-headline {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
@@ -126,6 +140,7 @@
   color: #000;
   cursor: pointer;
   margin-top: 7rem;
+
 }
 body #priceRating:hover {
   box-shadow: inset 0px 0px 10px rgb(141, 140, 140);
@@ -218,7 +233,6 @@ body #priceRating:hover {
     flex-direction: row;
     list-style-type: none;
     gap: 4rem;
-    margin-top: auto;
   }
   .nav-burger {
     display: none;
