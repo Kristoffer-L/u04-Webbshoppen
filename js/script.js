@@ -10,15 +10,13 @@ const cartItems = document.getElementById("cartItems");
 const navBurger = document.getElementById("navBurger");
 const navList = document.getElementById("navList");
 const navCart = document.getElementById("cart");
-
-let buyItems = 0;
-
+const apiLoading = document.getElementById("apiLoading");
 const selectPR = document.getElementById("priceRating");
 
 let inputValue = "";
 async function getInfo() {
   try {
-    const response = await fetch("./json/data.json");
+    const response = await fetch("https://fakestoreapi.com/products");
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -27,6 +25,7 @@ async function getInfo() {
     runner(data);
   } catch (error) {
     console.error("Error", error);
+    apiLoading.textContent = "Something went wrong"
   }
 }
 
@@ -119,6 +118,7 @@ function filterData(data, type) {
 }
 
 function runner(data) {
+  apiLoading.classList.add("display-none")
   renderHTML(data);
   let type = "empty";
   const currentData = filterData(data, type);

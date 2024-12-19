@@ -10,6 +10,15 @@
   width: 4rem;
   height: auto;
 }
+.nav-link {
+  background-image: linear-gradient(#02005f, var(--nav-color));
+  color: var(--text-color);
+  text-decoration: none;
+  width: 10rem;
+  padding: 0.5rem 1rem;
+  border: solid 1px #4c4c4c;
+  border-radius: 1rem;
+}
 .main-container {
   display: flex;
   flex-direction: column;
@@ -66,13 +75,16 @@ h1 {
 }
 .submit-pay {
   background-image: linear-gradient(#8583f1, #3d3bb1);
+  color: var(--text-color);
   border: solid 2px #3d3bb1;
   margin: 2rem;
   padding: 1rem 2rem;
   border-radius: 2rem;
   font-size: 1.5rem;
 }
-
+.submit-pay:active {
+  box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, 0.30);
+}
 .payment,
 .e-mail,
 .your-name,
@@ -88,7 +100,9 @@ h1 {
   background: linear-gradient(135deg, rgb(61, 59, 177), rgb(3, 3, 3));
   padding: 1rem;
 }
-
+.footer-content {
+  color: var(--text-color);
+}
 @media (min-width: 768px) {
 }
 
