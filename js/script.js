@@ -87,6 +87,13 @@ function sortFunction(event, type, data) {
   cardSection.innerHTML = ` `;
   let selectedValue = event;
 
+  gtag('event', 'change_sorting', {
+    'event_category': 'Sorting products by price or rating',
+    'event_label': `${selectedValue}`,
+    'value': 2,
+    'debug_mode': true
+  });
+
   if (selectedValue === "highestPrice" || selectedValue === "lowestPrice") {
     const sortedData = data.sort((a, b) => (selectedValue === "lowestPrice" ? a.price - b.price : b.price - a.price));
     const filterSorted = filterData(sortedData, type);
@@ -123,20 +130,51 @@ function runner(data) {
       switch (typeCategory) {
         case "womensClothing":
           type = "women's clothing";
+          gtag('event', 'category_change', {
+            'event_category': 'swapped category',
+            'event_label': `${type}`,
+            'value': 1,
+            'debug_mode': true
+          });
           break;
         case "mensClothing":
           type = "men's clothing";
+          gtag('event', 'category_change', {
+            'event_category': 'swapped category',
+            'event_label': `${type}`,
+            'value': 1,
+            'debug_mode': true
+          });
           break;
         case "electronics":
           type = "electronics";
+          gtag('event', 'category_change', {
+            'event_category': 'swapped category',
+            'event_label': `${type}`,
+            'value': 1,
+            'debug_mode': true
+          });
           break;
         case "jewelery":
           type = "jewelery";
+          gtag('event', 'category_change', {
+            'event_category': 'swapped category',
+            'event_label': `${type}`,
+            'value': 1,
+            'debug_mode': true
+          });
           break;
       }
+        gtag('event', 'category_change', {
+    'event_category': 'swapped category',
+    'event_label': `${type}`,
+    'value': 1,
+    'debug_mode': true
+  });
       renderHTML(filterData(data, type));
     });
   });
+
   selectPR.addEventListener("change", (event) => {
     inputValue = event.target.value;
     sortFunction(event.target.value, type, currentData);
