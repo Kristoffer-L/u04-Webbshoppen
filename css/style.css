@@ -32,7 +32,17 @@
   width: 4rem;
   height: auto;
 }
-
+.nav-cart-headline, #cartItems {
+  margin-bottom: 1rem;
+}
+.anchor-go-to-cart {
+  background-image: linear-gradient(#8583f1, #3d3bb1);
+  color: var(--text-color);
+  border: solid 2px #3d3bb1;
+  border-radius: 1rem; 
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
 /* FOOTER STYLING */
 
 .footer-container {
@@ -59,6 +69,7 @@
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
+  margin-bottom: 2rem;
 }
 
 .card-container {

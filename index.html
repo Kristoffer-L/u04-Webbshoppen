@@ -31,28 +31,26 @@
         <figcaption class="cart-caption display-none" id="cartCaption"></figcaption>
       </figure>
       <div class="cart-dropdown hidden" id="cartDropdown">
-        <h3>Your cart</h3>
+        <h3 class="nav-cart-headline">Your cart</h3>
         <ul id="cartItems"></ul>
-        <a href="./checkout.html">Go to cart</a>
+        <a class="anchor-go-to-cart" href="./checkout.html">Go to cart</a>
       </div>
     </nav>
 
-    <select  class="sort-select" name="price-rating" id="priceRating">
-        <option value="">Sort</option>
-        <option value="highestPrice">Highest Price</option>
-        <option value="lowestPrice">Lowest Price</option>
-        <option value="highestRating">Highest Rating</option>
-        <option value="lowestRating">Lowest Rating</option>
-    </select>
-
-
     <main>
-      <section class="section" id="cardSection"></section>
+      <section>
+        <select  class="sort-select" name="price-rating" id="priceRating">
+          <option value="">Sort</option>
+          <option value="highestPrice">Highest Price</option>
+          <option value="lowestPrice">Lowest Price</option>
+          <option value="highestRating">Highest Rating</option>
+          <option value="lowestRating">Lowest Rating</option>
+        </select>
+      </section>
+      <section class="section" id="cardSection">
+        <h1 id="apiLoading">Loading.....</h1>
+      </section>
     </main>
-
-    <div id="totalPrice">Total: €0.00</div>
-
-
     <footer class="footer-container">
         <div class="footer-content">Made by the best company in the world</div>
     </footer>
