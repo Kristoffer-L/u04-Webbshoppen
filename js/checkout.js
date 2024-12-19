@@ -1,4 +1,4 @@
-const submitBtn = document.querySelector("submitBtn");
+const submitBtn = document.getElementById("submitBtn");
 const cart = JSON.parse(localStorage.all);
 const articleCart = document.querySelector(".article-cart");
 const uniqueItems = [...new Map(cart.map((v) => [v.id, v])).values()];
