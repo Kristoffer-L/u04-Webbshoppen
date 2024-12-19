@@ -1,6 +1,16 @@
+const submitBtn = document.querySelector("submitBtn");
 const cart = JSON.parse(localStorage.all);
 const articleCart = document.querySelector(".article-cart");
 const uniqueItems = [...new Map(cart.map((v) => [v.id, v])).values()];
+
+submitBtn.addEventListener("click", () => {
+  gtag('event', 'button_click', {
+    'event_category': 'interactions on product buy button',
+    'event_label': 'buying products from cart',
+    'value': 1,
+    'debug_mode': true
+  });
+})
 
 const prices = cart.map((v) => {
   return v.price;
