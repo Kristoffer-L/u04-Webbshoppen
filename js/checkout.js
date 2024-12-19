@@ -5,7 +5,6 @@ const uniqueItems = [...new Map(cart.map((v) => [v.id, v])).values()];
 
 submitBtn.addEventListener("click", () => {
   gtag('event', 'button_click', {
-    'event_name': 'buy_button_click',
     'event_category': 'interactions on product buy button',
     'event_label': 'buying products from cart',
     'value': 1,
