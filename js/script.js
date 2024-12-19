@@ -130,39 +130,19 @@ function runner(data) {
       switch (typeCategory) {
         case "womensClothing":
           type = "women's clothing";
-          gtag('event', 'category_change', {
-            'event_category': 'swapped category',
-            'event_label': `${type}`,
-            'value': 1,
-            'debug_mode': true
-          });
+
           break;
         case "mensClothing":
           type = "men's clothing";
-          gtag('event', 'category_change', {
-            'event_category': 'swapped category',
-            'event_label': `${type}`,
-            'value': 1,
-            'debug_mode': true
-          });
+
           break;
         case "electronics":
           type = "electronics";
-          gtag('event', 'category_change', {
-            'event_category': 'swapped category',
-            'event_label': `${type}`,
-            'value': 1,
-            'debug_mode': true
-          });
+
           break;
         case "jewelery":
           type = "jewelery";
-          gtag('event', 'category_change', {
-            'event_category': 'swapped category',
-            'event_label': `${type}`,
-            'value': 1,
-            'debug_mode': true
-          });
+
           break;
       }
         gtag('event', 'category_change', {
