@@ -56,10 +56,20 @@ h1 {
 .form-city {
   width: 45%;
 }
-
+.cart-price {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+}
 .submit-pay {
-  background-color: aquamarine;
+  background-image: linear-gradient(#8583f1, #3d3bb1);
+  border: solid 2px #3d3bb1;
   margin: 2rem;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
   font-size: 1.5rem;
 }
 
