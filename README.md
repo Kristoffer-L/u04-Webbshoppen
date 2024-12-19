@@ -18,4 +18,5 @@ Vi har placerat 3 olika custom gtags som alla 3 informerar angående knapptryck.
  “button_click" - knapp tryck på “Pay now
 “category_change” - knapp tryck på de olika kategorierna alternativen
 “change_sorting” - knapp tryck på de olika sorterings alternativen(rating/price)
+##
 ![google analytics stats](./img/stats-page.png)
